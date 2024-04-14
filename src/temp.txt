@@ -1,0 +1,30 @@
+ let po_upperbound = self.y + self.vely*elapsedtime;
+                let po_lowerbound =  self.y +self.h+ self.vely*elapsedtime; 
+                let po_leftbound = self.x + self.velx*elapsedtime; 
+                let po_rightbound = self.x +self.w+ self.velx*elapsedtime; 
+                let tile_upperbound = tile.y as f32;
+                let tile_lowerbound = tile.y as f32+ tile.h as f32;
+                let tile_leftbound = tile.x as f32;
+                let tile_rightbound = tile.x as f32 +tile.w as f32;
+
+
+                if po_upperbound <= tile_lowerbound && po_lowerbound > tile_lowerbound && self.x < tile_rightbound && self.x > tile_leftbound
+                {                 
+                    self.y = tile_lowerbound+1.0;                    
+                    return true
+                }
+                else if po_lowerbound > tile_upperbound && po_upperbound < tile_upperbound && self.x < tile_rightbound && self.x > tile_leftbound
+                {
+                    self.y = tile_upperbound -self.h;                    
+                    return true
+                }
+                else if po_leftbound < tile_rightbound && po_rightbound > tile_rightbound && self.y < tile_lowerbound && self.y > tile_upperbound
+                {
+                    self.x = tile_rightbound;
+                    return true
+                }
+                else if po_rightbound > tile_leftbound && po_leftbound < tile_leftbound && self.y < tile_lowerbound && self.y > tile_upperbound
+                {
+                    self.x = tile_leftbound -self.w;
+                    return true
+                }
